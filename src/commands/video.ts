@@ -1,6 +1,4 @@
 import { IBotData } from "../interfaces/IBotData";
-import axios from "axios";
-import { API_KEY } from "../configurations/API_CONFIGURATIONS";
 import fs from 'fs'
 import ytdl from "ytdl-core";
 import * as yt from 'youtube-search-without-api-key';
@@ -8,8 +6,6 @@ import * as yt from 'youtube-search-without-api-key';
 export default async ({ sendVideo,sendText, args, reply, webMessage }: IBotData) => {
 
   try {
-    // const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&utype=video&part=snippet&maxResults=1&q=${args}`)
-    // let r = response.data.items[0]
 
     let r = (await yt.search(args))[0]
 
@@ -29,7 +25,6 @@ export default async ({ sendVideo,sendText, args, reply, webMessage }: IBotData)
       if (err) throw err;
       console.log('file was deleted');
     });
-        
     },18000);
 
   } catch (e) {
