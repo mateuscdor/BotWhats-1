@@ -27,6 +27,10 @@
   "dependencies": {
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "@hapi/boom": "^9.1.4",
-    "qrcode-terminal": "^0.12.0"
+    "axios": "^0.26.1",
+    "ffmpeg": "^0.0.4",
+    "qrcode-terminal": "^0.12.0",
+    "youtube-search-without-api-key": "^1.0.7",
+    "ytdl-core": "^4.11.0"
   }
 }
