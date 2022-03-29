@@ -14,14 +14,14 @@ export default async ({ sendVideo,sendText, args, reply, webMessage }: IBotData)
     reply("Aguarde, estamos processando o video " + r.title + ". Esse processo pode domoraar um pouco...")
 
     ytdl(`http://www.youtube.com/watch?v=${r.id.videoId}`)
-      .pipe(fs.createWriteStream(`./src/movies/${titlevideo}`));
+      .pipe(fs.createWriteStream(`./assets/temp/${titlevideo}`));
 
       setTimeout(()=>{
-        sendVideo(`./src/movies/${titlevideo}`, r.snippet.title, true)
+        sendVideo(`./assets/temp/${titlevideo}`, r.snippet.title, true)
     },17000);
 
       setTimeout(()=>{
-     fs.unlink(`./src/movies/${titlevideo}`, (err) => {
+     fs.unlink(`./assets/temp/${titlevideo}`, (err) => {
       if (err) throw err;
       console.log('file was deleted');
     });
