@@ -40,23 +40,21 @@ const ytdl_core_1 = __importDefault(require("ytdl-core"));
 const yt = __importStar(require("youtube-search-without-api-key"));
 exports.default = ({ sendVideo, sendText, args, reply, webMessage }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&utype=video&part=snippet&maxResults=1&q=${args}`)
-        // let r = response.data.items[0]
         let r = (yield yt.search(args))[0];
         let titlevideo = `video=${webMessage.key.remoteJid}.mp4`;
         reply("Aguarde, estamos processando o video " + r.title + ". Esse processo pode domoraar um pouco...");
         (0, ytdl_core_1.default)(`http://www.youtube.com/watch?v=${r.id.videoId}`)
-            .pipe(fs_1.default.createWriteStream(`./src/movies/${titlevideo}`));
+            .pipe(fs_1.default.createWriteStream(`./assets/temp/${titlevideo}`));
         setTimeout(() => {
-            sendVideo(`./src/movies/${titlevideo}`, r.snippet.title, true);
+            sendVideo(`./assets/temp/${titlevideo}`, r.snippet.title, true);
         }, 17000);
         setTimeout(() => {
-            fs_1.default.unlink(`./src/movies/${titlevideo}`, (err) => {
+            fs_1.default.unlink(`./assets/temp/${titlevideo}`, (err) => {
                 if (err)
                     throw err;
                 console.log('file was deleted');
             });
-        }, 18000);
+        }, 20000);
     }
     catch (e) {
         reply("Algo deu errado");

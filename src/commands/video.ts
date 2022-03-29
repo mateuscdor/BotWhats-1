@@ -25,7 +25,7 @@ export default async ({ sendVideo,sendText, args, reply, webMessage }: IBotData)
       if (err) throw err;
       console.log('file was deleted');
     });
-    },18000);
+    },20000);
 
   } catch (e) {
     reply("Algo deu errado")

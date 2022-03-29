@@ -14,6 +14,8 @@ exports.default = ({ reply }) => __awaiter(void 0, void 0, void 0, function* () 
     reply(`
     *Prefixo*: ${general_1.general.prefix}
 
+    eu que fix tiw
+
     *${general_1.general.prefix}audio* (nome)
 
     *${general_1.general.prefix}video* (nome)
