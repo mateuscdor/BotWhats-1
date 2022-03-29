@@ -15,14 +15,14 @@ export default async ({ sendVideo,sendText, args, reply, webMessage }: IBotData)
 
     let titlevideo = `video=${webMessage.key.remoteJid}.mp4`
 
-    reply("Aguarde, estamos processando o video " + r.title)
+    reply("Aguarde, estamos processando o video " + r.title + ". Esse processo pode domoraar um pouco...")
 
     ytdl(`http://www.youtube.com/watch?v=${r.id.videoId}`)
       .pipe(fs.createWriteStream(`./src/movies/${titlevideo}`));
 
       setTimeout(()=>{
         sendVideo(`./src/movies/${titlevideo}`, r.snippet.title, true)
-    },7000);
+    },17000);
 
       setTimeout(()=>{
      fs.unlink(`./src/movies/${titlevideo}`, (err) => {
@@ -30,7 +30,7 @@ export default async ({ sendVideo,sendText, args, reply, webMessage }: IBotData)
       console.log('file was deleted');
     });
         
-    },10000);
+    },18000);
 
   } catch (e) {
     reply("Algo deu errado")

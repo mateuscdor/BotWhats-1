@@ -51,35 +51,6 @@ import {
   
       return await socket.sendMessage(remoteJid, params, options);
     };
-
-    const sendVideo = async (
-      pathOrBuffer: string | Buffer,
-      caption = "",
-      isReply = true
-    ) => {
-      let options = {};
-  
-      if (isReply) {
-        options = {
-          quoted: webMessage,
-        };
-      }
-  
-      const video =
-        pathOrBuffer instanceof Buffer
-          ? pathOrBuffer
-          : fs.readFileSync(pathOrBuffer);
-  
-      const params = caption
-        ? {
-            video,
-            caption: `${general.prefixEmoji} ${caption}`,
-          }
-        : { video };
-  
-      return await socket.sendMessage(remoteJid, params, options);
-    };
-  
   
     const sendSticker = async (pathOrBuffer: string | Buffer, isReply = true) => {
       let options = {};
@@ -139,6 +110,34 @@ import {
         },
         options
       );
+    };
+
+    const sendVideo = async (
+      pathOrBuffer: string | Buffer,
+      caption = "",
+      isReply = true
+    ) => {
+      let options = {};
+  
+      if (isReply) {
+        options = {
+          quoted: webMessage,
+        };
+      }
+  
+      const video =
+        pathOrBuffer instanceof Buffer
+          ? pathOrBuffer
+          : fs.readFileSync(pathOrBuffer);
+  
+      const params = caption
+        ? {
+            video,
+            caption: `${general.prefixEmoji} ${caption}`,
+          }
+        : { video };
+  
+      return await socket.sendMessage(remoteJid, params, options);
     };
   
     const reply = async (text: string) => {
