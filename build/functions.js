@@ -86,6 +86,24 @@ const getBotData = (socket, webMessage) => {
             mimetype: "audio/mpeg",
         }, options);
     });
+    const sendVideo = (pathOrBuffer, caption = "", isReply = true) => __awaiter(void 0, void 0, void 0, function* () {
+        let options = {};
+        if (isReply) {
+            options = {
+                quoted: webMessage,
+            };
+        }
+        const video = pathOrBuffer instanceof Buffer
+            ? pathOrBuffer
+            : fs_1.default.readFileSync(pathOrBuffer);
+        const params = caption
+            ? {
+                video,
+                caption: `${general_1.general.prefixEmoji} ${caption}`,
+            }
+            : { video };
+        return yield socket.sendMessage(remoteJid, params, options);
+    });
     const reply = (text) => __awaiter(void 0, void 0, void 0, function* () {
         return socket.sendMessage(webMessage.key.remoteJid, { text: `${general_1.general.prefixEmoji} ${text}` }, { quoted: webMessage });
     });
@@ -96,6 +114,7 @@ const getBotData = (socket, webMessage) => {
         sendImage,
         sendSticker,
         sendAudio,
+        sendVideo,
         reply,
         remoteJid,
         userJid,

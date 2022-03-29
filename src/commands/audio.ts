@@ -8,18 +8,18 @@ import { IBotData } from "../interfaces/IBotData";
 import { getRandomName } from "../functions";
 
 export default async ({ reply, sendImage, sendAudio, args }: IBotData) => {
-  await reply("Aguarde... Pesquisando... ");
+  await reply("Aguarde... Pesquisando... ⌛");
 
   const maxLength = 100;
 
   if (!args || args.length > 100) {
-    return await reply(`Limite de ${maxLength} caracteres por pesquisa!`);
+    return await reply(`⚠ Limite de ${maxLength} caracteres por pesquisa!`);
   }
 
   const result = await yts(args);
 
   if (!result || !result.videos.length) {
-    return await reply(`Nenhuma música encontrada!`);
+    return await reply(`⚠ Nenhuma música encontrada!`);
   }
 
   const video = result.videos[0];
@@ -44,16 +44,21 @@ export default async ({ reply, sendImage, sendAudio, args }: IBotData) => {
     `Dados encontrados
   
 *Título*: ${video.title}
+
 *Descrição*: ${video.description}
+
 *Duração*: ${video.timestamp}${dateText}
 *Views*: ${video.views}
-Realizando download... `
+
+Realizando download... ⌛`
   );
 
   const tempFile = path.resolve(
     __dirname,
     "..",
-    "movies",
+    "..",
+    "assets",
+    "temp",
     getRandomName("mp3")
   );
 

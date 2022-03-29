@@ -4,5 +4,5 @@ exports.general = void 0;
 exports.general = {
     botName: "Bot do Dudu",
     prefix: '.',
-    prefixEmoji: '<3'
+    prefixEmoji: ''
 };
