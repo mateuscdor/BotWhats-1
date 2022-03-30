@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "set PORT=3030 && ts-node-dev ./src/start.ts",
-    "start": "set PORT=3030 && node ./build/start.js"
+    "dev": "ts-node-dev ./src/start.ts",
+    "start": "node."
   },
   "repository": {
     "type": "git",
