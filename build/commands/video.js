@@ -36,25 +36,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const ytdl_core_1 = __importDefault(require("ytdl-core"));
 const yt = __importStar(require("youtube-search-without-api-key"));
-exports.default = ({ sendVideo, sendText, args, reply, webMessage }) => __awaiter(void 0, void 0, void 0, function* () {
+const functions_1 = require("../functions");
+exports.default = ({ sendVideo, args, reply, webMessage }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let r = (yield yt.search(args))[0];
-        let titlevideo = `video=${webMessage.key.remoteJid}.mp4`;
         reply("Aguarde, estamos processando o video " + r.title + ". Esse processo pode domoraar um pouco...");
+        const tempFile = path_1.default.resolve(__dirname, "..", "..", "assets", "temp", (0, functions_1.getRandomName)("mp4"));
         (0, ytdl_core_1.default)(`http://www.youtube.com/watch?v=${r.id.videoId}`)
-            .pipe(fs_1.default.createWriteStream(`./assets/temp/${titlevideo}`));
-        setTimeout(() => {
-            sendVideo(`./assets/temp/${titlevideo}`, r.snippet.title, true);
-        }, 17000);
-        setTimeout(() => {
-            fs_1.default.unlink(`./assets/temp/${titlevideo}`, (err) => {
-                if (err)
-                    throw err;
-                console.log('file was deleted');
-            });
-        }, 20000);
+            .pipe(fs_1.default.createWriteStream(tempFile))
+            .on("finish", () => __awaiter(void 0, void 0, void 0, function* () {
+            yield sendVideo(tempFile, r.title, true);
+            fs_1.default.unlinkSync(tempFile);
+        }));
     }
     catch (e) {
         reply("Algo deu errado");

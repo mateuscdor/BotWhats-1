@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev ./src/start.ts",
-    "start": "node ./build/start.js"
+    "dev": "set PORT=3030 && ts-node-dev ./src/start.ts",
+    "start": "set PORT=3030 && nodemon ./build/start.js"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,12 @@
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "@hapi/boom": "^9.1.4",
     "axios": "^0.26.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
     "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
     "node-fetch": "^3.2.3",
+    "nodemon": "^2.0.15",
     "qrcode-terminal": "^0.12.0",
     "youtube-search-without-api-key": "^1.0.7",
     "yt-search": "^2.10.3",
